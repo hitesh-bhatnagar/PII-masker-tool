@@ -1,0 +1,25 @@
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+.venv/
+
+.DS_Store
+Thumbs.db
+
+*.log
+
+uploads/
+outputs/
+
+# Secrets
+.env
+
+# IDE
+.vscode/
+.idea/
+
+# Temporary
+*.tmp
+*.swp
