@@ -1,654 +1,951 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>ITGC PII Shield</title>
-  <style>
-    :root {
-      --bg: #0b0f14;
-      --surface: #111824;
-      --surface-2: #0f1520;
-      --border: #223047;
-      --text: #ecf2ff;
-      --muted: #8a97ab;
-      --accent: #43c4ff;
-      --accent-2: #7cda8a;
-      --danger: #ff7a7a;
-      --warn: #ffd166;
-      --shadow: 0 16px 48px rgba(0,0,0,0.24);
-    }
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>ITGC PII Shield</title>
+        <style>
+            :root {
+                --bg: #0b0f14;
+                --surface: #111824;
+                --surface-2: #0f1520;
+                --border: #223047;
+                --text: #ecf2ff;
+                --muted: #8a97ab;
+                --accent: #43c4ff;
+                --accent-2: #7cda8a;
+                --danger: #ff7a7a;
+                --warn: #ffd166;
+                --shadow: 0 16px 48px rgba(0, 0, 0, 0.24);
+            }
 
-    * { box-sizing: border-box; }
-    body {
-      margin: 0;
-      background: radial-gradient(circle at top, rgba(67,196,255,0.09), transparent 28%),
-                  radial-gradient(circle at bottom right, rgba(124,218,138,0.08), transparent 24%),
-                  var(--bg);
-      color: var(--text);
-      font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
-      min-height: 100vh;
-    }
+            * {
+                box-sizing: border-box;
+            }
+            body {
+                margin: 0;
+                background:
+                    radial-gradient(
+                        circle at top,
+                        rgba(67, 196, 255, 0.09),
+                        transparent 28%
+                    ),
+                    radial-gradient(
+                        circle at bottom right,
+                        rgba(124, 218, 138, 0.08),
+                        transparent 24%
+                    ),
+                    var(--bg);
+                color: var(--text);
+                font-family:
+                    Inter,
+                    system-ui,
+                    -apple-system,
+                    Segoe UI,
+                    Roboto,
+                    Arial,
+                    sans-serif;
+                min-height: 100vh;
+            }
 
-    .wrap { max-width: 1180px; margin: 0 auto; padding: 28px 18px 42px; }
-    .hero {
-      display: grid;
-      grid-template-columns: 1.4fr 1fr;
-      gap: 18px;
-      align-items: stretch;
-      margin-bottom: 18px;
-    }
-    @media (max-width: 920px) { .hero { grid-template-columns: 1fr; } }
+            .wrap {
+                max-width: 1180px;
+                margin: 0 auto;
+                padding: 28px 18px 42px;
+            }
+            .hero {
+                display: grid;
+                grid-template-columns: 1.4fr 1fr;
+                gap: 18px;
+                align-items: stretch;
+                margin-bottom: 18px;
+            }
+            @media (max-width: 920px) {
+                .hero {
+                    grid-template-columns: 1fr;
+                }
+            }
 
-    .panel {
-      background: rgba(17,24,36,0.92);
-      border: 1px solid var(--border);
-      border-radius: 22px;
-      box-shadow: var(--shadow);
-      overflow: hidden;
-    }
-    .hero-left { padding: 28px; }
-    .badge {
-      display: inline-flex;
-      gap: 8px;
-      align-items: center;
-      padding: 7px 12px;
-      border: 1px solid rgba(67,196,255,0.24);
-      border-radius: 999px;
-      color: var(--accent);
-      background: rgba(67,196,255,0.06);
-      font-size: 12px;
-      letter-spacing: .08em;
-      text-transform: uppercase;
-    }
-    h1 { margin: 16px 0 10px; font-size: clamp(32px, 5vw, 56px); line-height: 1.02; }
-    h1 span { color: var(--accent); }
-    .sub { color: var(--muted); margin: 0; max-width: 760px; line-height: 1.55; }
-    .chips { display:flex; flex-wrap:wrap; gap:8px; margin-top: 18px; }
-    .chip {
-      font-size: 12px; color: #cfe4ff;
-      padding: 7px 10px; border-radius: 999px;
-      background: rgba(255,255,255,0.03); border: 1px solid var(--border);
-    }
+            .panel {
+                background: rgba(17, 24, 36, 0.92);
+                border: 1px solid var(--border);
+                border-radius: 22px;
+                box-shadow: var(--shadow);
+                overflow: hidden;
+            }
+            .hero-left {
+                padding: 28px;
+            }
+            .badge {
+                display: inline-flex;
+                gap: 8px;
+                align-items: center;
+                padding: 7px 12px;
+                border: 1px solid rgba(67, 196, 255, 0.24);
+                border-radius: 999px;
+                color: var(--accent);
+                background: rgba(67, 196, 255, 0.06);
+                font-size: 12px;
+                letter-spacing: 0.08em;
+                text-transform: uppercase;
+            }
+            h1 {
+                margin: 16px 0 10px;
+                font-size: clamp(32px, 5vw, 56px);
+                line-height: 1.02;
+            }
+            h1 span {
+                color: var(--accent);
+            }
+            .sub {
+                color: var(--muted);
+                margin: 0;
+                max-width: 760px;
+                line-height: 1.55;
+            }
+            .chips {
+                display: flex;
+                flex-wrap: wrap;
+                gap: 8px;
+                margin-top: 18px;
+            }
+            .chip {
+                font-size: 12px;
+                color: #cfe4ff;
+                padding: 7px 10px;
+                border-radius: 999px;
+                background: rgba(255, 255, 255, 0.03);
+                border: 1px solid var(--border);
+            }
 
-    .hero-right { padding: 22px; display: grid; gap: 12px; }
-    .mini {
-      background: var(--surface-2);
-      border: 1px solid var(--border);
-      border-radius: 18px;
-      padding: 16px;
-    }
-    .mini h3 { margin: 0 0 6px; font-size: 14px; }
-    .mini p { margin: 0; color: var(--muted); font-size: 13px; line-height: 1.5; }
+            .hero-right {
+                padding: 22px;
+                display: grid;
+                gap: 12px;
+            }
+            .mini {
+                background: var(--surface-2);
+                border: 1px solid var(--border);
+                border-radius: 18px;
+                padding: 16px;
+            }
+            .mini h3 {
+                margin: 0 0 6px;
+                font-size: 14px;
+            }
+            .mini p {
+                margin: 0;
+                color: var(--muted);
+                font-size: 13px;
+                line-height: 1.5;
+            }
 
-    .tabs {
-      display: flex;
-      gap: 10px;
-      margin: 18px 0;
-    }
-    .tab {
-      appearance: none;
-      border: 1px solid var(--border);
-      background: rgba(255,255,255,0.03);
-      color: var(--text);
-      padding: 12px 16px;
-      border-radius: 14px;
-      cursor: pointer;
-      font-weight: 700;
-    }
-    .tab.active {
-      background: rgba(67,196,255,0.12);
-      border-color: rgba(67,196,255,0.34);
-      color: #dff5ff;
-    }
+            .tabs {
+                display: flex;
+                gap: 10px;
+                margin: 18px 0;
+            }
+            .tab {
+                appearance: none;
+                border: 1px solid var(--border);
+                background: rgba(255, 255, 255, 0.03);
+                color: var(--text);
+                padding: 12px 16px;
+                border-radius: 14px;
+                cursor: pointer;
+                font-weight: 700;
+            }
+            .tab.active {
+                background: rgba(67, 196, 255, 0.12);
+                border-color: rgba(67, 196, 255, 0.34);
+                color: #dff5ff;
+            }
 
-    .grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 18px;
-    }
-    @media (max-width: 920px) { .grid { grid-template-columns: 1fr; } }
+            .grid {
+                display: grid;
+                grid-template-columns: 1fr 1fr;
+                gap: 18px;
+            }
+            @media (max-width: 920px) {
+                .grid {
+                    grid-template-columns: 1fr;
+                }
+            }
 
-    .card {
-      background: rgba(17,24,36,0.92);
-      border: 1px solid var(--border);
-      border-radius: 22px;
-      box-shadow: var(--shadow);
-      padding: 20px;
-    }
-    .card h2 { margin: 0 0 8px; font-size: 20px; }
-    .card .desc { margin: 0 0 16px; color: var(--muted); line-height: 1.5; }
+            .card {
+                background: rgba(17, 24, 36, 0.92);
+                border: 1px solid var(--border);
+                border-radius: 22px;
+                box-shadow: var(--shadow);
+                padding: 20px;
+            }
+            .card h2 {
+                margin: 0 0 8px;
+                font-size: 20px;
+            }
+            .card .desc {
+                margin: 0 0 16px;
+                color: var(--muted);
+                line-height: 1.5;
+            }
 
-    .dropzone {
-      position: relative;
-      border: 1.5px dashed rgba(67,196,255,0.34);
-      background: rgba(255,255,255,0.02);
-      border-radius: 18px;
-      padding: 26px;
-      text-align: center;
-      transition: .2s ease;
-      cursor: pointer;
-      overflow: hidden;
-    }
-    .dropzone:hover, .dropzone.dragging { border-color: var(--accent); background: rgba(67,196,255,0.04); }
-    .dropzone input { position:absolute; inset:0; opacity:0; cursor:pointer; }
-    .dropzone .big { font-size: 42px; margin-bottom: 8px; }
-    .dropzone .title { font-weight: 800; font-size: 18px; }
-    .dropzone .hint { color: var(--muted); font-size: 13px; margin-top: 4px; }
+            .dropzone {
+                position: relative;
+                border: 1.5px dashed rgba(67, 196, 255, 0.34);
+                background: rgba(255, 255, 255, 0.02);
+                border-radius: 18px;
+                padding: 26px;
+                text-align: center;
+                transition: 0.2s ease;
+                cursor: pointer;
+                overflow: hidden;
+            }
+            .dropzone:hover,
+            .dropzone.dragging {
+                border-color: var(--accent);
+                background: rgba(67, 196, 255, 0.04);
+            }
+            .dropzone input {
+                position: absolute;
+                inset: 0;
+                opacity: 0;
+                cursor: pointer;
+            }
+            .dropzone .big {
+                font-size: 42px;
+                margin-bottom: 8px;
+            }
+            .dropzone .title {
+                font-weight: 800;
+                font-size: 18px;
+            }
+            .dropzone .hint {
+                color: var(--muted);
+                font-size: 13px;
+                margin-top: 4px;
+            }
 
-    .selected {
-      display: none;
-      margin-top: 12px;
-      padding: 12px 14px;
-      border-radius: 14px;
-      border: 1px solid rgba(124,218,138,0.3);
-      background: rgba(124,218,138,0.08);
-      color: #dfffe5;
-      font-size: 13px;
-      gap: 8px;
-      align-items: center;
-    }
-    .selected.show { display: flex; }
+            .selected {
+                display: none;
+                margin-top: 12px;
+                padding: 12px 14px;
+                border-radius: 14px;
+                border: 1px solid rgba(124, 218, 138, 0.3);
+                background: rgba(124, 218, 138, 0.08);
+                color: #dfffe5;
+                font-size: 13px;
+                gap: 8px;
+                align-items: center;
+            }
+            .selected.show {
+                display: flex;
+            }
 
-    .form-grid {
-      display: grid;
-      gap: 12px;
-      margin-top: 16px;
-    }
-    .field label {
-      display: block;
-      margin-bottom: 6px;
-      color: var(--muted);
-      font-size: 12px;
-      font-weight: 700;
-      letter-spacing: .04em;
-      text-transform: uppercase;
-    }
-    .field input, .field select {
-      width: 100%;
-      border-radius: 14px;
-      border: 1px solid var(--border);
-      background: #0c121b;
-      color: var(--text);
-      padding: 12px 14px;
-      outline: none;
-      font-size: 14px;
-    }
-    .field input:focus, .field select:focus { border-color: var(--accent); }
+            .form-grid {
+                display: grid;
+                gap: 12px;
+                margin-top: 16px;
+            }
+            .field label {
+                display: block;
+                margin-bottom: 6px;
+                color: var(--muted);
+                font-size: 12px;
+                font-weight: 700;
+                letter-spacing: 0.04em;
+                text-transform: uppercase;
+            }
+            .field input,
+            .field select {
+                width: 100%;
+                border-radius: 14px;
+                border: 1px solid var(--border);
+                background: #0c121b;
+                color: var(--text);
+                padding: 12px 14px;
+                outline: none;
+                font-size: 14px;
+            }
+            .field input:focus,
+            .field select:focus {
+                border-color: var(--accent);
+            }
 
-    .toggle-row {
-      display: flex;
-      justify-content: space-between;
-      gap: 12px;
-      align-items: center;
-      margin-top: 6px;
-      padding: 12px 0 2px;
-    }
-    .toggle {
-      width: 48px; height: 26px;
-      border-radius: 999px;
-      background: #2c3950;
-      position: relative;
-      cursor: pointer;
-      flex: none;
-    }
-    .toggle::after {
-      content: "";
-      width: 20px; height: 20px;
-      border-radius: 50%;
-      background: white;
-      position: absolute;
-      top: 3px; left: 3px;
-      transition: .18s ease;
-    }
-    .toggle.on { background: var(--accent); }
-    .toggle.on::after { transform: translateX(22px); }
+            .toggle-row {
+                display: flex;
+                justify-content: space-between;
+                gap: 12px;
+                align-items: center;
+                margin-top: 6px;
+                padding: 12px 0 2px;
+            }
+            .toggle {
+                width: 48px;
+                height: 26px;
+                border-radius: 999px;
+                background: #2c3950;
+                position: relative;
+                cursor: pointer;
+                flex: none;
+            }
+            .toggle::after {
+                content: "";
+                width: 20px;
+                height: 20px;
+                border-radius: 50%;
+                background: white;
+                position: absolute;
+                top: 3px;
+                left: 3px;
+                transition: 0.18s ease;
+            }
+            .toggle.on {
+                background: var(--accent);
+            }
+            .toggle.on::after {
+                transform: translateX(22px);
+            }
 
-    .btn {
-      margin-top: 16px;
-      width: 100%;
-      padding: 13px 16px;
-      border: none;
-      border-radius: 16px;
-      font-size: 15px;
-      font-weight: 800;
-      cursor: pointer;
-      background: linear-gradient(135deg, var(--accent), #78e5ff);
-      color: #04131b;
-    }
-    .btn.secondary {
-      background: linear-gradient(135deg, var(--accent-2), #b7f4c0);
-      color: #0a1a0d;
-    }
-    .btn:disabled { opacity: .55; cursor: not-allowed; }
+            .btn {
+                margin-top: 16px;
+                width: 100%;
+                padding: 13px 16px;
+                border: none;
+                border-radius: 16px;
+                font-size: 15px;
+                font-weight: 800;
+                cursor: pointer;
+                background: linear-gradient(135deg, var(--accent), #78e5ff);
+                color: #04131b;
+            }
+            .btn.secondary {
+                background: linear-gradient(135deg, var(--accent-2), #b7f4c0);
+                color: #0a1a0d;
+            }
+            .btn:disabled {
+                opacity: 0.55;
+                cursor: not-allowed;
+            }
 
-    .msg {
-      display: none;
-      margin-top: 12px;
-      padding: 12px 14px;
-      border-radius: 14px;
-      font-size: 14px;
-      line-height: 1.45;
-    }
-    .msg.show { display: block; }
-    .msg.error { border: 1px solid rgba(255,122,122,.3); background: rgba(255,122,122,.08); color: #ffd9d9; }
-    .msg.success { border: 1px solid rgba(124,218,138,.3); background: rgba(124,218,138,.08); color: #e4ffe9; }
+            .msg {
+                display: none;
+                margin-top: 12px;
+                padding: 12px 14px;
+                border-radius: 14px;
+                font-size: 14px;
+                line-height: 1.45;
+            }
+            .msg.show {
+                display: block;
+            }
+            .msg.error {
+                border: 1px solid rgba(255, 122, 122, 0.3);
+                background: rgba(255, 122, 122, 0.08);
+                color: #ffd9d9;
+            }
+            .msg.success {
+                border: 1px solid rgba(124, 218, 138, 0.3);
+                background: rgba(124, 218, 138, 0.08);
+                color: #e4ffe9;
+            }
 
-    .results { display: none; margin-top: 18px; }
-    .stats {
-      display: grid;
-      grid-template-columns: repeat(3,1fr);
-      gap: 12px;
-      margin-bottom: 12px;
-    }
-    @media (max-width: 720px) { .stats { grid-template-columns: 1fr; } }
-    .stat {
-      background: var(--surface-2);
-      border: 1px solid var(--border);
-      border-radius: 18px;
-      padding: 16px;
-    }
-    .stat .value { font-size: 30px; font-weight: 900; color: var(--accent); }
-    .stat .label { color: var(--muted); font-size: 13px; margin-top: 4px; }
+            .results {
+                display: none;
+                margin-top: 18px;
+            }
+            .stats {
+                display: grid;
+                grid-template-columns: repeat(3, 1fr);
+                gap: 12px;
+                margin-bottom: 12px;
+            }
+            @media (max-width: 720px) {
+                .stats {
+                    grid-template-columns: 1fr;
+                }
+            }
+            .stat {
+                background: var(--surface-2);
+                border: 1px solid var(--border);
+                border-radius: 18px;
+                padding: 16px;
+            }
+            .stat .value {
+                font-size: 30px;
+                font-weight: 900;
+                color: var(--accent);
+            }
+            .stat .label {
+                color: var(--muted);
+                font-size: 13px;
+                margin-top: 4px;
+            }
 
-    .table {
-      width: 100%;
-      border-collapse: collapse;
-      overflow: hidden;
-      border-radius: 18px;
-      border: 1px solid var(--border);
-      background: var(--surface-2);
-    }
-    .table th, .table td {
-      padding: 10px 12px;
-      text-align: left;
-      border-bottom: 1px solid rgba(34,48,71,0.7);
-      font-size: 13px;
-    }
-    .table th { color: var(--muted); font-weight: 800; }
-    .table tr:last-child td { border-bottom: none; }
-    .badge2 {
-      display:inline-block;
-      padding: 4px 8px;
-      border-radius: 999px;
-      background: rgba(67,196,255,0.1);
-      border: 1px solid rgba(67,196,255,0.22);
-      color: #dff5ff;
-      font-size: 12px;
-    }
+            .table {
+                width: 100%;
+                border-collapse: collapse;
+                overflow: hidden;
+                border-radius: 18px;
+                border: 1px solid var(--border);
+                background: var(--surface-2);
+            }
+            .table th,
+            .table td {
+                padding: 10px 12px;
+                text-align: left;
+                border-bottom: 1px solid rgba(34, 48, 71, 0.7);
+                font-size: 13px;
+            }
+            .table th {
+                color: var(--muted);
+                font-weight: 800;
+            }
+            .table tr:last-child td {
+                border-bottom: none;
+            }
+            .badge2 {
+                display: inline-block;
+                padding: 4px 8px;
+                border-radius: 999px;
+                background: rgba(67, 196, 255, 0.1);
+                border: 1px solid rgba(67, 196, 255, 0.22);
+                color: #dff5ff;
+                font-size: 12px;
+            }
 
-    .downloads { display:flex; gap: 10px; flex-wrap: wrap; margin-top: 12px; }
-    .linkbtn {
-      display:inline-flex;
-      align-items:center;
-      justify-content:center;
-      padding: 11px 14px;
-      border-radius: 14px;
-      border: 1px solid var(--border);
-      color: var(--text);
-      text-decoration:none;
-      background: rgba(255,255,255,0.03);
-      font-weight: 700;
-    }
+            .downloads {
+                display: flex;
+                gap: 10px;
+                flex-wrap: wrap;
+                margin-top: 12px;
+            }
+            .linkbtn {
+                display: inline-flex;
+                align-items: center;
+                justify-content: center;
+                padding: 11px 14px;
+                border-radius: 14px;
+                border: 1px solid var(--border);
+                color: var(--text);
+                text-decoration: none;
+                background: rgba(255, 255, 255, 0.03);
+                font-weight: 700;
+            }
 
-    .audit {
-      margin-top: 16px;
-      background: var(--surface-2);
-      border: 1px solid var(--border);
-      border-radius: 18px;
-      overflow: hidden;
-    }
-    .audit .row {
-      display:flex; justify-content:space-between; gap: 12px;
-      padding: 12px 14px;
-      border-bottom: 1px solid rgba(34,48,71,0.7);
-      font-size: 13px;
-    }
-    .audit .row:last-child { border-bottom: none; }
-    .muted { color: var(--muted); }
-    footer {
-      color: var(--muted);
-      text-align: center;
-      margin-top: 18px;
-      font-size: 12px;
-    }
-    .hidden { display:none !important; }
-  </style>
-</head>
-<body>
-  <div class="wrap">
-    <section class="hero">
-      <div class="panel hero-left">
-        <div class="badge">ITGC PII Shield · Browser-based file protection</div>
-        <h1>Mask PII, <span>encrypt</span> files, and decrypt them in the browser.</h1>
-        <p class="sub">
-          Built for client Excel files used in ITGC audits. Upload a workbook, mask sensitive fields, encrypt the masked file, and let colleagues decrypt it later from the same website without installing Python.
-        </p>
-        <div class="chips">
-          <span class="chip">Excel upload</span>
-          <span class="chip">PII masking</span>
-          <span class="chip">Fernet encryption</span>
-          <span class="chip">Browser decryption</span>
-          <span class="chip">Audit logging</span>
+            .audit {
+                margin-top: 16px;
+                background: var(--surface-2);
+                border: 1px solid var(--border);
+                border-radius: 18px;
+                overflow: hidden;
+            }
+            .audit .row {
+                display: flex;
+                justify-content: space-between;
+                gap: 12px;
+                padding: 12px 14px;
+                border-bottom: 1px solid rgba(34, 48, 71, 0.7);
+                font-size: 13px;
+            }
+            .audit .row:last-child {
+                border-bottom: none;
+            }
+            .muted {
+                color: var(--muted);
+            }
+            footer {
+                color: var(--muted);
+                text-align: center;
+                margin-top: 18px;
+                font-size: 12px;
+            }
+            .hidden {
+                display: none !important;
+            }
+        </style>
+    </head>
+    <body>
+        <div class="wrap">
+            <section class="hero">
+                <div class="panel hero-left">
+                    <div class="badge">
+                        ITGC PII Shield · Browser-based file protection
+                    </div>
+                    <h1>
+                        Mask PII, <span>encrypt</span> files, and decrypt them
+                        in the browser.
+                    </h1>
+                    <p class="sub">
+                        Built for client Excel files used in ITGC audits. Upload
+                        a workbook, mask sensitive fields, encrypt the masked
+                        file, and let colleagues decrypt it later from the same
+                        website without installing Python.
+                    </p>
+                    <div class="chips">
+                        <span class="chip">Excel upload</span>
+                        <span class="chip">PII masking</span>
+                        <span class="chip">Fernet encryption</span>
+                        <span class="chip">Browser decryption</span>
+                        <span class="chip">Audit logging</span>
+                    </div>
+                </div>
+                <div class="panel hero-right">
+                    <div class="mini">
+                        <h3>What gets masked</h3>
+                        <p>
+                            Names, emails, phones, government IDs, passports,
+                            bank details, credentials, addresses, DOB, and other
+                            strong PII patterns. Business codes like employee
+                            code, job code, cost center, and department
+                            references are preserved unless they clearly match a
+                            PII pattern.
+                        </p>
+                    </div>
+                    <div class="mini">
+                        <h3>How to use it</h3>
+                        <p>
+                            Upload the file, enter a password or key if needed,
+                            and download the output. No local Packages/tools, no
+                            command line, no manual decryption steps.
+                        </p>
+                    </div>
+                </div>
+            </section>
+
+            <div class="tabs">
+                <button class="tab active" id="tabProcess" type="button">
+                    Mask & Encrypt
+                </button>
+                <button class="tab" id="tabDecrypt" type="button">
+                    Decrypt .enc
+                </button>
+            </div>
+
+            <div class="grid">
+                <section class="card" id="processCard">
+                    <h2>Mask and encrypt workbook</h2>
+                    <p class="desc">
+                        Upload an <strong>.xlsx</strong> file. The server masks
+                        PII, saves a masked workbook, then encrypts it.
+                    </p>
+
+                    <div class="dropzone" id="processDrop">
+                        <input type="file" id="processFile" accept=".xlsx" />
+                        <div class="big">📄</div>
+                        <div class="title">Drop Excel file here</div>
+                        <div class="hint">Only .xlsx supported · max 50 MB</div>
+                    </div>
+                    <div class="selected" id="processSelected">
+                        ✅ <span id="processName"></span>
+                    </div>
+
+                    <div class="form-grid">
+                        <div class="field">
+                            <label>Encryption password (optional)</label>
+                            <input
+                                type="password"
+                                id="encryptPassword"
+                                placeholder="Leave blank to generate a key"
+                            />
+                        </div>
+                        <div class="field">
+                            <label>Audit reference (optional)</label>
+                            <input
+                                type="text"
+                                id="auditReference"
+                                placeholder="Example: Q4-ITGC-ClientA"
+                            />
+                        </div>
+                    </div>
+
+                    <div class="toggle-row">
+                        <div>
+                            <strong>Highlight masked cells</strong><br />
+                            <span class="muted"
+                                >Yellow fill in the masked workbook</span
+                            >
+                        </div>
+                        <div class="toggle on" id="highlightToggle"></div>
+                    </div>
+
+                    <button class="btn" id="processBtn" type="button">
+                        Mask and encrypt
+                    </button>
+                    <div class="msg" id="processMsg"></div>
+
+                    <div class="results" id="processResults">
+                        <div class="stats">
+                            <div class="stat">
+                                <div class="value" id="maskedCount">0</div>
+                                <div class="label">PII fields masked</div>
+                            </div>
+                            <div class="stat">
+                                <div class="value" id="scannedCount">0</div>
+                                <div class="label">Cells scanned</div>
+                            </div>
+                            <div class="stat">
+                                <div class="value" id="sheetCount">0</div>
+                                <div class="label">Sheets processed</div>
+                            </div>
+                        </div>
+
+                        <div id="keyBox" class="msg success hidden"></div>
+
+                        <table class="table" id="breakdownTable">
+                            <thead>
+                                <tr>
+                                    <th>PII type</th>
+                                    <th>Count</th>
+                                </tr>
+                            </thead>
+                            <tbody id="breakdownBody"></tbody>
+                        </table>
+
+                        <div class="downloads" id="processDownloads">
+                            <a
+                                class="linkbtn"
+                                id="maskedDownload"
+                                href="#"
+                                target="_blank"
+                                >Download masked workbook</a
+                            >
+                            <a
+                                class="linkbtn"
+                                id="encryptedDownload"
+                                href="#"
+                                target="_blank"
+                                >Download encrypted file</a
+                            >
+                        </div>
+                    </div>
+                </section>
+
+                <section class="card" id="decryptCard">
+                    <h2>Decrypt encrypted file</h2>
+                    <p class="desc">
+                        Upload a <strong>.enc</strong> file created by this tool
+                        and decrypt it inside the browser.
+                    </p>
+
+                    <div class="dropzone" id="decryptDrop">
+                        <input type="file" id="decryptFile" accept=".enc" />
+                        <div class="big">🔐</div>
+                        <div class="title">Drop encrypted file here</div>
+                        <div class="hint">Only .enc supported</div>
+                    </div>
+                    <div class="selected" id="decryptSelected">
+                        ✅ <span id="decryptName"></span>
+                    </div>
+
+                    <div class="form-grid">
+                        <div class="field">
+                            <label>Secret</label>
+                            <input
+                                type="password"
+                                id="decryptSecret"
+                                placeholder="Password or Fernet key"
+                            />
+                        </div>
+                        <div class="field">
+                            <label>Decrypt mode</label>
+                            <select id="decryptMode">
+                                <option value="password">Password mode</option>
+                                <option value="key">Key mode</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <button class="btn secondary" id="decryptBtn" type="button">
+                        Decrypt file
+                    </button>
+                    <div class="msg" id="decryptMsg"></div>
+                </section>
+            </div>
+
+            <section class="card" style="margin-top: 18px">
+                <h2>Recent audit trail</h2>
+                <p class="desc">
+                    Shows the latest successful and failed operations on the
+                    server.
+                </p>
+                <div class="audit" id="auditList">
+                    <div class="row">
+                        <span class="muted">Loading…</span
+                        ><span class="muted">—</span>
+                    </div>
+                </div>
+            </section>
+
+            <footer>
+                Server-side processing only · No files are kept permanently
+                beyond the processing output unless you configure retention
+            </footer>
         </div>
-      </div>
-      <div class="panel hero-right">
-        <div class="mini">
-          <h3>What gets masked</h3>
-          <p>Names, emails, phones, government IDs, passports, bank details, credentials, addresses, DOB, and other strong PII patterns. Business codes like employee code, job code, cost center, and department references are preserved unless they clearly match a PII pattern.</p>
-        </div>
-        <div class="mini">
-          <h3>How colleagues use it</h3>
-          <p>They open the site, upload the file, enter a password or key if needed, and download the output. No local Python, no command line, no manual decryption steps.</p>
-        </div>
-      </div>
-    </section>
 
-    <div class="tabs">
-      <button class="tab active" id="tabProcess" type="button">Mask & Encrypt</button>
-      <button class="tab" id="tabDecrypt" type="button">Decrypt .enc</button>
-    </div>
+        <script>
+            const processTab = document.getElementById("tabProcess");
+            const decryptTab = document.getElementById("tabDecrypt");
+            const processCard = document.getElementById("processCard");
+            const decryptCard = document.getElementById("decryptCard");
 
-    <div class="grid">
-      <section class="card" id="processCard">
-        <h2>Mask and encrypt workbook</h2>
-        <p class="desc">Upload an <strong>.xlsx</strong> file. The server masks PII, saves a masked workbook, then encrypts it.</p>
+            function activate(mode) {
+                const processActive = mode === "process";
+                processTab.classList.toggle("active", processActive);
+                decryptTab.classList.toggle("active", !processActive);
+                processCard.classList.toggle("hidden", !processActive);
+                decryptCard.classList.toggle("hidden", processActive);
+            }
+            processTab.addEventListener("click", () => activate("process"));
+            decryptTab.addEventListener("click", () => activate("decrypt"));
 
-        <div class="dropzone" id="processDrop">
-          <input type="file" id="processFile" accept=".xlsx" />
-          <div class="big">📄</div>
-          <div class="title">Drop Excel file here</div>
-          <div class="hint">Only .xlsx supported · max 50 MB</div>
-        </div>
-        <div class="selected" id="processSelected">✅ <span id="processName"></span></div>
+            const highlightToggle = document.getElementById("highlightToggle");
+            let highlightOn = true;
+            highlightToggle.addEventListener("click", () => {
+                highlightOn = !highlightOn;
+                highlightToggle.classList.toggle("on", highlightOn);
+            });
 
-        <div class="form-grid">
-          <div class="field">
-            <label>Encryption password (optional)</label>
-            <input type="password" id="encryptPassword" placeholder="Leave blank to generate a key" />
-          </div>
-          <div class="field">
-            <label>Audit reference (optional)</label>
-            <input type="text" id="auditReference" placeholder="Example: Q4-ITGC-ClientA" />
-          </div>
-        </div>
+            function setMsg(el, text, type) {
+                el.className = "msg show " + (type || "");
+                el.textContent = text;
+            }
+            function clearMsg(el) {
+                el.className = "msg";
+                el.textContent = "";
+            }
 
-        <div class="toggle-row">
-          <div>
-            <strong>Highlight masked cells</strong><br>
-            <span class="muted">Yellow fill in the masked workbook</span>
-          </div>
-          <div class="toggle on" id="highlightToggle"></div>
-        </div>
+            function bindDrop(drop, input, selected, nameEl) {
+                input.addEventListener("change", () => {
+                    const file = input.files[0];
+                    if (file) {
+                        selected.classList.add("show");
+                        nameEl.textContent = file.name;
+                    }
+                });
+                ["dragover", "dragenter"].forEach((evt) =>
+                    drop.addEventListener(evt, (e) => {
+                        e.preventDefault();
+                        drop.classList.add("dragging");
+                    }),
+                );
+                ["dragleave", "drop"].forEach((evt) =>
+                    drop.addEventListener(evt, (e) => {
+                        e.preventDefault();
+                        drop.classList.remove("dragging");
+                    }),
+                );
+                drop.addEventListener("drop", (e) => {
+                    const files = e.dataTransfer.files;
+                    if (files && files[0]) {
+                        input.files = files;
+                        selected.classList.add("show");
+                        nameEl.textContent = files[0].name;
+                    }
+                });
+            }
 
-        <button class="btn" id="processBtn" type="button">Mask and encrypt</button>
-        <div class="msg" id="processMsg"></div>
+            bindDrop(
+                document.getElementById("processDrop"),
+                document.getElementById("processFile"),
+                document.getElementById("processSelected"),
+                document.getElementById("processName"),
+            );
+            bindDrop(
+                document.getElementById("decryptDrop"),
+                document.getElementById("decryptFile"),
+                document.getElementById("decryptSelected"),
+                document.getElementById("decryptName"),
+            );
 
-        <div class="results" id="processResults">
-          <div class="stats">
-            <div class="stat"><div class="value" id="maskedCount">0</div><div class="label">PII fields masked</div></div>
-            <div class="stat"><div class="value" id="scannedCount">0</div><div class="label">Cells scanned</div></div>
-            <div class="stat"><div class="value" id="sheetCount">0</div><div class="label">Sheets processed</div></div>
-          </div>
+            function downloadBlob(blob, filename) {
+                const url = URL.createObjectURL(blob);
+                const a = document.createElement("a");
+                a.href = url;
+                a.download = filename;
+                document.body.appendChild(a);
+                a.click();
+                a.remove();
+                setTimeout(() => URL.revokeObjectURL(url), 5000);
+            }
 
-          <div id="keyBox" class="msg success hidden"></div>
-
-          <table class="table" id="breakdownTable">
-            <thead>
-              <tr>
-                <th>PII type</th>
-                <th>Count</th>
-              </tr>
-            </thead>
-            <tbody id="breakdownBody"></tbody>
-          </table>
-
-          <div class="downloads" id="processDownloads">
-            <a class="linkbtn" id="maskedDownload" href="#" target="_blank">Download masked workbook</a>
-            <a class="linkbtn" id="encryptedDownload" href="#" target="_blank">Download encrypted file</a>
-          </div>
-        </div>
-      </section>
-
-      <section class="card" id="decryptCard">
-        <h2>Decrypt encrypted file</h2>
-        <p class="desc">Upload a <strong>.enc</strong> file created by this tool and decrypt it inside the browser.</p>
-
-        <div class="dropzone" id="decryptDrop">
-          <input type="file" id="decryptFile" accept=".enc" />
-          <div class="big">🔐</div>
-          <div class="title">Drop encrypted file here</div>
-          <div class="hint">Only .enc supported</div>
-        </div>
-        <div class="selected" id="decryptSelected">✅ <span id="decryptName"></span></div>
-
-        <div class="form-grid">
-          <div class="field">
-            <label>Secret</label>
-            <input type="password" id="decryptSecret" placeholder="Password or Fernet key" />
-          </div>
-          <div class="field">
-            <label>Decrypt mode</label>
-            <select id="decryptMode">
-              <option value="password">Password mode</option>
-              <option value="key">Key mode</option>
-            </select>
-          </div>
-        </div>
-
-        <button class="btn secondary" id="decryptBtn" type="button">Decrypt file</button>
-        <div class="msg" id="decryptMsg"></div>
-      </section>
-    </div>
-
-    <section class="card" style="margin-top:18px;">
-      <h2>Recent audit trail</h2>
-      <p class="desc">Shows the latest successful and failed operations on the server.</p>
-      <div class="audit" id="auditList">
-        <div class="row"><span class="muted">Loading…</span><span class="muted">—</span></div>
-      </div>
-    </section>
-
-    <footer>Server-side processing only · No files are kept permanently beyond the processing output unless you configure retention</footer>
-  </div>
-
-  <script>
-    const processTab = document.getElementById('tabProcess');
-    const decryptTab = document.getElementById('tabDecrypt');
-    const processCard = document.getElementById('processCard');
-    const decryptCard = document.getElementById('decryptCard');
-
-    function activate(mode) {
-      const processActive = mode === 'process';
-      processTab.classList.toggle('active', processActive);
-      decryptTab.classList.toggle('active', !processActive);
-      processCard.classList.toggle('hidden', !processActive);
-      decryptCard.classList.toggle('hidden', processActive);
-    }
-    processTab.addEventListener('click', () => activate('process'));
-    decryptTab.addEventListener('click', () => activate('decrypt'));
-
-    const highlightToggle = document.getElementById('highlightToggle');
-    let highlightOn = true;
-    highlightToggle.addEventListener('click', () => {
-      highlightOn = !highlightOn;
-      highlightToggle.classList.toggle('on', highlightOn);
-    });
-
-    function setMsg(el, text, type) {
-      el.className = 'msg show ' + (type || '');
-      el.textContent = text;
-    }
-    function clearMsg(el) {
-      el.className = 'msg';
-      el.textContent = '';
-    }
-
-    function bindDrop(drop, input, selected, nameEl) {
-      input.addEventListener('change', () => {
-        const file = input.files[0];
-        if (file) {
-          selected.classList.add('show');
-          nameEl.textContent = file.name;
-        }
-      });
-      ['dragover', 'dragenter'].forEach(evt => drop.addEventListener(evt, e => {
-        e.preventDefault();
-        drop.classList.add('dragging');
-      }));
-      ['dragleave', 'drop'].forEach(evt => drop.addEventListener(evt, e => {
-        e.preventDefault();
-        drop.classList.remove('dragging');
-      }));
-      drop.addEventListener('drop', e => {
-        const files = e.dataTransfer.files;
-        if (files && files[0]) {
-          input.files = files;
-          selected.classList.add('show');
-          nameEl.textContent = files[0].name;
-        }
-      });
-    }
-
-    bindDrop(document.getElementById('processDrop'), document.getElementById('processFile'), document.getElementById('processSelected'), document.getElementById('processName'));
-    bindDrop(document.getElementById('decryptDrop'), document.getElementById('decryptFile'), document.getElementById('decryptSelected'), document.getElementById('decryptName'));
-
-    function downloadBlob(blob, filename) {
-      const url = URL.createObjectURL(blob);
-      const a = document.createElement('a');
-      a.href = url;
-      a.download = filename;
-      document.body.appendChild(a);
-      a.click();
-      a.remove();
-      setTimeout(() => URL.revokeObjectURL(url), 5000);
-    }
-
-    async function loadAudit() {
-      try {
-        const res = await fetch('/api/audit');
-        const data = await res.json();
-        const items = (data.logs || []).slice().reverse().slice(0, 10);
-        const el = document.getElementById('auditList');
-        if (!items.length) {
-          el.innerHTML = '<div class="row"><span class="muted">No audit entries yet.</span><span class="muted">—</span></div>';
-          return;
-        }
-        el.innerHTML = items.map(x => `
+            async function loadAudit() {
+                try {
+                    const res = await fetch("/api/audit");
+                    const data = await res.json();
+                    const items = (data.logs || [])
+                        .slice()
+                        .reverse()
+                        .slice(0, 10);
+                    const el = document.getElementById("auditList");
+                    if (!items.length) {
+                        el.innerHTML =
+                            '<div class="row"><span class="muted">No audit entries yet.</span><span class="muted">—</span></div>';
+                        return;
+                    }
+                    el.innerHTML = items
+                        .map(
+                            (x) => `
           <div class="row">
-            <span>${new Date(x.timestamp).toLocaleString()} · ${x.action || '—'}</span>
-            <span>${x.file || '—'} · ${x.status || '—'}</span>
+            <span>${new Date(x.timestamp).toLocaleString()} · ${x.action || "—"}</span>
+            <span>${x.file || "—"} · ${x.status || "—"}</span>
           </div>
-        `).join('');
-      } catch {}
-    }
+        `,
+                        )
+                        .join("");
+                } catch {}
+            }
 
-    async function processFile() {
-      const file = document.getElementById('processFile').files[0];
-      const msg = document.getElementById('processMsg');
-      const btn = document.getElementById('processBtn');
-      clearMsg(msg);
+            async function processFile() {
+                const file = document.getElementById("processFile").files[0];
+                const msg = document.getElementById("processMsg");
+                const btn = document.getElementById("processBtn");
+                clearMsg(msg);
 
-      if (!file) {
-        setMsg(msg, 'Please choose an .xlsx file first.', 'error');
-        return;
-      }
+                if (!file) {
+                    setMsg(msg, "Please choose an .xlsx file first.", "error");
+                    return;
+                }
 
-      const fd = new FormData();
-      fd.append('file', file);
-      fd.append('highlight_masked', String(highlightOn));
-      fd.append('reference', document.getElementById('auditReference').value || '');
-      fd.append('password', document.getElementById('encryptPassword').value || '');
+                const fd = new FormData();
+                fd.append("file", file);
+                fd.append("highlight_masked", String(highlightOn));
+                fd.append(
+                    "reference",
+                    document.getElementById("auditReference").value || "",
+                );
+                fd.append(
+                    "password",
+                    document.getElementById("encryptPassword").value || "",
+                );
 
-      btn.disabled = true;
-      btn.textContent = 'Processing…';
+                btn.disabled = true;
+                btn.textContent = "Processing…";
 
-      try {
-        const res = await fetch('/api/process', { method: 'POST', body: fd });
-        const data = await res.json();
-        if (!res.ok) throw new Error(data.error || 'Processing failed');
+                try {
+                    const res = await fetch("/api/process", {
+                        method: "POST",
+                        body: fd,
+                    });
+                    const data = await res.json();
+                    if (!res.ok)
+                        throw new Error(data.error || "Processing failed");
 
-        document.getElementById('processResults').style.display = 'block';
-        document.getElementById('maskedCount').textContent = data.report.total_pii_masked.toLocaleString();
-        document.getElementById('scannedCount').textContent = data.report.total_cells_scanned.toLocaleString();
-        document.getElementById('sheetCount').textContent = data.report.sheets_processed.toLocaleString();
+                    document.getElementById("processResults").style.display =
+                        "block";
+                    document.getElementById("maskedCount").textContent =
+                        data.report.total_pii_masked.toLocaleString();
+                    document.getElementById("scannedCount").textContent =
+                        data.report.total_cells_scanned.toLocaleString();
+                    document.getElementById("sheetCount").textContent =
+                        data.report.sheets_processed.toLocaleString();
 
-        const tbody = document.getElementById('breakdownBody');
-        const entries = Object.entries(data.report.pii_breakdown || {}).sort((a,b) => b[1]-a[1]);
-        tbody.innerHTML = entries.map(([k, v]) => `<tr><td><span class="badge2">${k}</span></td><td>${v}</td></tr>`).join('') || '<tr><td colspan="2" class="muted">No PII detected</td></tr>';
+                    const tbody = document.getElementById("breakdownBody");
+                    const entries = Object.entries(
+                        data.report.pii_breakdown || {},
+                    ).sort((a, b) => b[1] - a[1]);
+                    tbody.innerHTML =
+                        entries
+                            .map(
+                                ([k, v]) =>
+                                    `<tr><td><span class="badge2">${k}</span></td><td>${v}</td></tr>`,
+                            )
+                            .join("") ||
+                        '<tr><td colspan="2" class="muted">No PII detected</td></tr>';
 
-        document.getElementById('maskedDownload').href = `/api/download/${data.download_token}/masked`;
-        document.getElementById('encryptedDownload').href = `/api/download/${data.download_token}/encrypted`;
+                    document.getElementById("maskedDownload").href =
+                        `/api/download/${data.download_token}/masked`;
+                    document.getElementById("encryptedDownload").href =
+                        `/api/download/${data.download_token}/encrypted`;
 
-        const keyBox = document.getElementById('keyBox');
-        if (data.encryption && data.encryption.key) {
-          keyBox.classList.remove('hidden');
-          keyBox.textContent = 'One-time key: ' + data.encryption.key;
-        } else {
-          keyBox.classList.add('hidden');
-          keyBox.textContent = '';
-        }
+                    const keyBox = document.getElementById("keyBox");
+                    if (data.encryption && data.encryption.key) {
+                        keyBox.classList.remove("hidden");
+                        keyBox.textContent =
+                            "One-time key: " + data.encryption.key;
+                    } else {
+                        keyBox.classList.add("hidden");
+                        keyBox.textContent = "";
+                    }
 
-        setMsg(msg, 'File processed successfully.', 'success');
-        await loadAudit();
-      } catch (err) {
-        setMsg(msg, err.message, 'error');
-      } finally {
-        btn.disabled = false;
-        btn.textContent = 'Mask and encrypt';
-      }
-    }
+                    setMsg(msg, "File processed successfully.", "success");
+                    await loadAudit();
+                } catch (err) {
+                    setMsg(msg, err.message, "error");
+                } finally {
+                    btn.disabled = false;
+                    btn.textContent = "Mask and encrypt";
+                }
+            }
 
-    async function decryptFile() {
-      const file = document.getElementById('decryptFile').files[0];
-      const msg = document.getElementById('decryptMsg');
-      const btn = document.getElementById('decryptBtn');
-      clearMsg(msg);
+            async function decryptFile() {
+                const file = document.getElementById("decryptFile").files[0];
+                const msg = document.getElementById("decryptMsg");
+                const btn = document.getElementById("decryptBtn");
+                clearMsg(msg);
 
-      if (!file) {
-        setMsg(msg, 'Please choose an .enc file first.', 'error');
-        return;
-      }
+                if (!file) {
+                    setMsg(msg, "Please choose an .enc file first.", "error");
+                    return;
+                }
 
-      const secret = document.getElementById('decryptSecret').value.trim();
-      const mode = document.getElementById('decryptMode').value;
-      if (!secret) {
-        setMsg(msg, 'Enter the password or key used for encryption.', 'error');
-        return;
-      }
+                const secret = document
+                    .getElementById("decryptSecret")
+                    .value.trim();
+                const mode = document.getElementById("decryptMode").value;
+                if (!secret) {
+                    setMsg(
+                        msg,
+                        "Enter the password or key used for encryption.",
+                        "error",
+                    );
+                    return;
+                }
 
-      const fd = new FormData();
-      fd.append('file', file);
-      fd.append('secret', secret);
-      fd.append('mode', mode);
+                const fd = new FormData();
+                fd.append("file", file);
+                fd.append("secret", secret);
+                fd.append("mode", mode);
 
-      btn.disabled = true;
-      btn.textContent = 'Decrypting…';
+                btn.disabled = true;
+                btn.textContent = "Decrypting…";
 
-      try {
-        const res = await fetch('/api/decrypt', { method: 'POST', body: fd });
-        if (!res.ok) {
-          const data = await res.json().catch(() => ({}));
-          throw new Error(data.error || 'Decryption failed');
-        }
+                try {
+                    const res = await fetch("/api/decrypt", {
+                        method: "POST",
+                        body: fd,
+                    });
+                    if (!res.ok) {
+                        const data = await res.json().catch(() => ({}));
+                        throw new Error(data.error || "Decryption failed");
+                    }
 
-        const blob = await res.blob();
-        const name = (file.name || 'file.enc').replace(/\.enc$/i, '') + '_decrypted.xlsx';
-        downloadBlob(blob, name);
-        setMsg(msg, 'Decryption complete. The Excel file has been downloaded.', 'success');
-        await loadAudit();
-      } catch (err) {
-        setMsg(msg, err.message, 'error');
-      } finally {
-        btn.disabled = false;
-        btn.textContent = 'Decrypt file';
-      }
-    }
+                    const blob = await res.blob();
+                    const name =
+                        (file.name || "file.enc").replace(/\.enc$/i, "") +
+                        "_decrypted.xlsx";
+                    downloadBlob(blob, name);
+                    setMsg(
+                        msg,
+                        "Decryption complete. The Excel file has been downloaded.",
+                        "success",
+                    );
+                    await loadAudit();
+                } catch (err) {
+                    setMsg(msg, err.message, "error");
+                } finally {
+                    btn.disabled = false;
+                    btn.textContent = "Decrypt file";
+                }
+            }
 
-    document.getElementById('processBtn').addEventListener('click', processFile);
-    document.getElementById('decryptBtn').addEventListener('click', decryptFile);
+            document
+                .getElementById("processBtn")
+                .addEventListener("click", processFile);
+            document
+                .getElementById("decryptBtn")
+                .addEventListener("click", decryptFile);
 
-    loadAudit();
-  </script>
-</body>
+            loadAudit();
+        </script>
+    </body>
 </html>
