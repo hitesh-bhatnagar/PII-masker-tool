@@ -18,8 +18,8 @@ from pathlib import Path
 from flask import Flask, jsonify, render_template, request, send_file
 from werkzeug.utils import secure_filename
 
-from excel_processor import process_excel
 from encryptor import decrypt_file, encrypt_file
+from excel_processor import process_excel
 
 BASE_DIR = Path(__file__).resolve().parent
 UPLOAD_DIR = BASE_DIR / "uploads"
@@ -98,14 +98,16 @@ def process():
     )
 
     if report["errors"]:
-        write_audit({
-            "job_id": job_id,
-            "action": "process",
-            "status": "error",
-            "file": original_name,
-            "errors": report["errors"],
-            "reference": audit_ref or None,
-        })
+        write_audit(
+            {
+                "job_id": job_id,
+                "action": "process",
+                "status": "error",
+                "file": original_name,
+                "errors": report["errors"],
+                "reference": audit_ref or None,
+            }
+        )
         return jsonify({"error": report["errors"][0]}), 500
 
     enc_result = encrypt_file(
@@ -114,19 +116,21 @@ def process():
         password=password,
     )
 
-    write_audit({
-        "job_id": job_id,
-        "action": "process",
-        "status": "success",
-        "file": original_name,
-        "reference": audit_ref or None,
-        "sheets": report["sheets_processed"],
-        "total_cells_scanned": report["total_cells_scanned"],
-        "total_pii_masked": report["total_pii_masked"],
-        "pii_breakdown": report["pii_breakdown"],
-        "encryption_mode": "password" if password else "generated_key",
-        "password_protected": bool(password),
-    })
+    write_audit(
+        {
+            "job_id": job_id,
+            "action": "process",
+            "status": "success",
+            "file": original_name,
+            "reference": audit_ref or None,
+            "sheets": report["sheets_processed"],
+            "total_cells_scanned": report["total_cells_scanned"],
+            "total_pii_masked": report["total_pii_masked"],
+            "pii_breakdown": report["pii_breakdown"],
+            "encryption_mode": "password" if password else "generated_key",
+            "password_protected": bool(password),
+        }
+    )
 
     try:
         upload_path.unlink(missing_ok=True)
@@ -148,7 +152,9 @@ def process():
 
     if not password:
         response["encryption"]["key"] = enc_result["key"]
-        response["encryption"]["key_warning"] = "Save this key now; it is not stored on the server."
+        response["encryption"]["key_warning"] = (
+            "Save this key now; it is not stored on the server."
+        )
 
     return jsonify(response)
 
@@ -189,25 +195,29 @@ def decrypt():
     )
 
     if not ok:
-        write_audit({
-            "job_id": job_id,
-            "action": "decrypt",
-            "status": "error",
-            "file": original_name,
-        })
+        write_audit(
+            {
+                "job_id": job_id,
+                "action": "decrypt",
+                "status": "error",
+                "file": original_name,
+            }
+        )
         try:
             upload_path.unlink(missing_ok=True)
         except Exception:
             pass
         return jsonify({"error": message or "Decryption failed"}), 400
 
-    write_audit({
-        "job_id": job_id,
-        "action": "decrypt",
-        "status": "success",
-        "file": original_name,
-        "mode": mode,
-    })
+    write_audit(
+        {
+            "job_id": job_id,
+            "action": "decrypt",
+            "status": "success",
+            "file": original_name,
+            "mode": mode,
+        }
+    )
 
     try:
         upload_path.unlink(missing_ok=True)
@@ -229,12 +239,14 @@ def download(job_id: str, file_type: str):
 
     if file_type == "masked":
         candidates = [
-            f for f in OUTPUT_DIR.iterdir()
+            f
+            for f in OUTPUT_DIR.iterdir()
             if f.name.startswith(f"{job_id}_") and f.name.endswith("_masked.xlsx")
         ]
     elif file_type == "encrypted":
         candidates = [
-            f for f in OUTPUT_DIR.iterdir()
+            f
+            for f in OUTPUT_DIR.iterdir()
             if f.name.startswith(f"{job_id}_") and f.name.endswith(".enc")
         ]
     else:
@@ -262,4 +274,4 @@ def audit():
 
 if __name__ == "__main__":
     port = int(os.environ.get("PORT", 5000))
-        app.run(host="0.0.0.0", port=port)
+    app.run(host="0.0.0.0", port=port)
