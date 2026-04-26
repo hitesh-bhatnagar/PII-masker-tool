@@ -23,3 +23,5 @@ outputs/
 # Temporary
 *.tmp
 *.swp
+
+audit_log.jsonl

@@ -1,2 +1,0 @@
-{"job_id": "f5bd00e8", "action": "process", "status": "success", "file": "HR_listing.xlsx", "reference": null, "sheets": 1, "total_cells_scanned": 13618, "total_pii_masked": 3424, "pii_breakdown": {"ZIP_CODE": 515, "FULL_NAME": 1608, "DATE_OF_BIRTH": 1290, "PHONE": 11}, "encryption_mode": "password", "password_protected": true, "timestamp": "2026-04-26T17:27:38.980991Z"}
-{"job_id": "3b7c3d31", "action": "decrypt", "status": "success", "file": "f5bd00e8_HR_listing_masked.enc", "mode": "password", "timestamp": "2026-04-26T17:28:30.752525Z"}
